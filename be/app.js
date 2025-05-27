@@ -4,8 +4,9 @@ import router from './router/router.js';
 import cors from 'cors';
 import { createServer } from 'http';
 import { Server } from 'socket.io';
+import dotenv from 'dotenv';
 
-
+dotenv.config();
 
 const app = express();
 const API_PORT = 4444; // REST API port
@@ -18,14 +19,26 @@ app.use(cors());
 app.use('/', router);
 
 // Database Connection
-mongoose.connect('mongodb://127.0.0.1:27017/mydb')
+// mongoose.connect('mongodb://127.0.0.1:27017/mydb')
+//     .then(() => {
+//         app.listen(API_PORT, () => {
+//             console.log(`Backend -> http://localhost:${API_PORT}`);
+//         });
+//     })
+//     .catch(err => {
+//         console.error('Error while connecting to DB:', err);
+//     });
+
+// Database Connection
+mongoose.connect(process.env.MONGO_URI)
     .then(() => {
         app.listen(API_PORT, () => {
-            console.log(`Backend -> http://localhost:${API_PORT}`);
+            console.log(`✅ Backend -> http://localhost:${API_PORT}`);
+            console.log("✅ MongoDB Connected");
         });
     })
     .catch(err => {
-        console.error('Error while connecting to DB:', err);
+        console.error("❌ Error while connecting to DB:", err);
     });
 
 // WebSocket Server
