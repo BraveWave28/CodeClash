@@ -20,7 +20,7 @@ const ContestMode = () => {
     if (action === "attempt-contest") {
       const fetchContests = async () => {
         try {
-          const response = await fetch("http://localhost:4444/getAllContests");
+          const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/getAllContests`);
           const data = await response.json();
           if (response.ok) {
             setAvailableContests(data.data);
@@ -136,7 +136,7 @@ const ContestMode = () => {
     }
     else{
         console.log("axiioossssss");
-        await axios.post("http://localhost:4444/createContest",{
+        await axios.post(`${import.meta.env.VITE_BACKEND_URL}/createContest`,{
           name,
           time,
           numQuestions,
@@ -174,7 +174,7 @@ const ContestMode = () => {
     useEffect(() => {
       const fetchContests = async () => {
         try {
-          const response = await fetch("http://localhost:4444/getAllContests");
+          const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/getAllContests`);
           const data = await response.json();
           if (response.ok) {
             setContests(data.data);
@@ -195,7 +195,7 @@ const ContestMode = () => {
     // Fetch submissions for a specific contest
     const fetchSubmissions = async (contestId) => {
       try {
-        const response = await fetch(`http://localhost:4444/getSubmission?id=${contestId}`);
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/getSubmission?id=${contestId}`);
         const data = await response.json();
         if (response.ok) {
           setSubmissions(data.data);
@@ -360,7 +360,7 @@ const submitFeedback = async (subID,logic,efficiency,codingStyle,clarity,custom)
       custom
   };
 try {
-     await fetch('http://localhost:4444/feedback', {
+     await fetch(`${import.meta.env.VITE_BACKEND_URL}/feedback`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

@@ -16,7 +16,7 @@ const CreatedContests = ({ user }) => {
   // Fetch contests created by the user
   const fetchContests = async () => {
     try {
-      const response = await fetch("http://localhost:4444/viewContests", {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/viewContests`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -59,7 +59,7 @@ const CreatedContests = ({ user }) => {
   // Submit the edit form
   const submitEdit = async (id) => {
     try {
-      const response = await fetch(`http://localhost:4444/editContest`, {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/editContest`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -84,7 +84,7 @@ const CreatedContests = ({ user }) => {
     if (!isConfirmed) return;
 
     try {
-      const response = await fetch(`http://localhost:4444/deleteContest/${id}`, {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/deleteContest/${id}`, {
         method: "DELETE",
       });
 

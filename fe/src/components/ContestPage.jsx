@@ -14,7 +14,7 @@ const ContestPage = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:4444/getContest?id=${attemptid}`)
+      .get(`${import.meta.env.VITE_BACKEND_URL}/getContest?id=${attemptid}`)
       .then((response) => {
         const data = response.data.details;
         setContestDetails(data);
@@ -94,7 +94,7 @@ const ContestPage = () => {
     };
 
     try {
-      const response = await axios.post("http://localhost:4444/createSubmission", submissionData);
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/createSubmission`, submissionData);
       if (response.status === 200) {
         alert("Submission successful!");
         localStorage.removeItem(`timer-${attemptid}`);
